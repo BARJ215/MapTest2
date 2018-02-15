@@ -1,3 +1,6 @@
+//var map;
+var currentCenter={lat: -34.397, lng: 150.644};
+
 //when the jQuery Mobile page is initialised
 $(document).on('pageinit', function() {
 	
