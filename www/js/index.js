@@ -63,7 +63,9 @@ function successPosition(position) {
     $('#headText').val(head);
     $('#speed').val(speed);
     
-	
+    //Update Current Center
+	currentCenter.lat=latitude;
+    currentCenter.lng=longitude;
 }
 
 //called if the position is not obtained correctly
