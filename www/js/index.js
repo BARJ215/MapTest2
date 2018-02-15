@@ -66,6 +66,7 @@ function successPosition(position) {
     //Update Current Center
 	currentCenter.lat=latitude;
     currentCenter.lng=longitude;
+    initMap();
 }
 
 //called if the position is not obtained correctly
