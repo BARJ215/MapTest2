@@ -5,7 +5,8 @@ var currentCenter={lat: -34.397, lng: 150.644};
 $(document).on('pageinit', function() {
 	
 	//set up listener for button click
-	$(document).on('click', getPosition);
+	//$(document).on('click', getPosition);
+    centerMap();
 	
 	//change time box to show message
 	$('#time').val("Press the button to get location data");
@@ -15,9 +16,8 @@ $(document).on('pageinit', function() {
         //timeout: 6000,
         //enableHighAccuracy: true
     };
-    //hi
-    
-    navigator.geolocation.watchPosition(successPosition,failPosition,locationOptions);
+
+    navigator.geolocation.watchPosition(updateTable,failPosition,locationOptions);
 	
 });
 
@@ -29,12 +29,17 @@ function getPosition() {
 	$('#time').val("Getting data...");
 	
 	//instruct location service to get position with appropriate callbacks
-	navigator.geolocation.getCurrentPosition(successPosition, failPosition);
+	navigator.geolocation.getCurrentPosition(updateTable, failPosition);
+}
+
+function centerMap(){
+    //instruct location service to get position with appropriate callbacks
+	navigator.geolocation.getCurrentPosition(updateCenter, failPosition);
 }
 
 
 //called when the position is successfully determined
-function successPosition(position) {
+function updateTable(position) {
 	
 	//You can find out more details about what the position obejct contains here:
 	// http://www.w3schools.com/html/html5_geolocation.asp
@@ -62,10 +67,13 @@ function successPosition(position) {
     $('#altAccText').val(altAcc);
     $('#headText').val(head);
     $('#speed').val(speed);
-    
+
+}
+
+function updateCenter(position){
     //Update Current Center
-	currentCenter.lat=latitude;
-    currentCenter.lng=longitude;
+	currentCenter.lat=position.coords.latitude;
+    currentCenter.lng=position.coords.longitude;
     initMap();
 }
 
